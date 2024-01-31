@@ -12,19 +12,12 @@ interface ItemProps {
 }
 
 function Item({item, checkboxes}: ItemProps): ReactNode {
-    let hit = false
-    Object.entries(checkboxes).map(([key, state]) => {
-        if ( item.color === key && state)
-            hit = true
-    })
-    if (hit) {
-        return (
-        <div>
-            <img src={item.image} alt={item.name} width={250}/>
-        </div>
-        )
+    let key: keyof typeof checkboxes
+    for ( key in checkboxes) {
+        if (item.color === key && checkboxes[key]) {
+            return <img src={item.image} alt={item.name} width={250}/>
+        }
     }
-    return <div></div>
 }
 
 export default function CardsContainer({checkboxes}: CardsContainerProps) {
