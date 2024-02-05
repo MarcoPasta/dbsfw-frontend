@@ -22,7 +22,7 @@ export default function CardBox() {
 
     return(
         <>
-        <div>
+        <div className="container">
             <CheckboxBar checkboxes={checkboxes} onCheckboxChange={handleChange}/>
             <CardsContainer checkboxes={checkboxes}/>
         </div>

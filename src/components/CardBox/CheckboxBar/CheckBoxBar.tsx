@@ -9,8 +9,7 @@ export default function CheckboxBar({checkboxes, onCheckboxChange}: CheckboxBarP
 
     return (
         <>
-            <p>CheckBox Component</p>
-            <div>
+            <div style={{backgroundColor: 'purple', position: 'absolute'}}>
                 <label htmlFor="red"> Red
                     <input type="checkbox" name="red" checked={checkboxes.red} onChange={() => onCheckboxChange('red')} />
                 </label>

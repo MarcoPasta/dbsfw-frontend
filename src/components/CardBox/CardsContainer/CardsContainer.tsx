@@ -1,4 +1,6 @@
 import { ReactNode, useEffect, useState } from "react"
+import './CardsContainer.css'
+
 import { FetchCards } from '../../../services/api.ts'
 import { Card, CheckboxState } from "../../../services/interfaces.ts"
 
@@ -15,7 +17,7 @@ function Item({item, checkboxes}: ItemProps): ReactNode {
     let key: keyof typeof checkboxes
     for ( key in checkboxes) {
         if (item.color === key && checkboxes[key]) {
-            return <img src={item.image} alt={item.name} width={250}/>
+            return <img src={item.image} alt={item.name} width={250}/> // 120
         }
     }
 }
@@ -45,11 +47,10 @@ export default function CardsContainer({checkboxes}: CardsContainerProps) {
 
     return(
         <>
-            <div>
-                <p>CardContainer Component</p> 
-                <ul style={{display: "flex", flexWrap: "wrap", listStyleType: "none", padding: 0}}>
+            <div style={{backgroundColor: 'red'}}>
+                <ul>
                     {cards.map( item => (
-                        <li key={item.id} style={{flexBasis: "33.33333%"}}>
+                        <li key={item.id}>
                             <Item item={item} checkboxes={checkboxes} />
                         </li>
                     ))}
