@@ -1,11 +1,23 @@
+import { Card } from "../../services/interfaces"
 
 
-export default function CardPreview() {
+type CardPreviewProps = {
+    hoveredCard?: Card
+}
 
+function DisplayCard({hoveredCard}: CardPreviewProps) {
+    if (hoveredCard != undefined)
+        return <img src={hoveredCard.image} width={400} alt={hoveredCard.name} />
+}
+
+export default function CardPreview({hoveredCard}: CardPreviewProps) {
+
+    if(hoveredCard != undefined)
+        console.log("CardPreview: ", hoveredCard.name)
 
     return (
         <div style={{backgroundColor: 'green'}}>
-            <p>CardPreview</p>
+            <DisplayCard hoveredCard={hoveredCard} /> 
         </div>
     )
 }

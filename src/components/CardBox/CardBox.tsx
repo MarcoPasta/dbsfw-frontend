@@ -1,10 +1,15 @@
 import { useState } from "react";
 import CardsContainer from "./CardsContainer/CardsContainer";
 import CheckboxBar from "./CheckboxBar/CheckBoxBar";
-import { CheckboxState } from "../../services/interfaces";
+import { Card, CheckboxState } from "../../services/interfaces";
 
 
-export default function CardBox() {
+type CardBoxProps = {
+    cards: Card[],
+    handleCardHover: (item: Card) => void
+}
+
+export default function CardBox({cards, handleCardHover}: CardBoxProps) {
     
     const [checkboxes, setCheckboxes] = useState<CheckboxState>({
         red: false, 
@@ -24,7 +29,7 @@ export default function CardBox() {
         <>
         <div className="container">
             <CheckboxBar checkboxes={checkboxes} onCheckboxChange={handleChange}/>
-            <CardsContainer checkboxes={checkboxes}/>
+            <CardsContainer cards={cards} checkboxes={checkboxes} handleCardHover={handleCardHover}/>
         </div>
         </>
     )
