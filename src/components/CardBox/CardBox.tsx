@@ -5,11 +5,11 @@ import { Card, CheckboxState } from "../../services/interfaces";
 
 
 type CardBoxProps = {
-    cards: Card[],
-    handleCardHover: (item: Card) => void
+    handleCardHover: (item: Card) => void,
+    handlePickedCard: (item: Card) => void
 }
 
-export default function CardBox({cards, handleCardHover}: CardBoxProps) {
+export default function CardBox({handlePickedCard, handleCardHover}: CardBoxProps) {
     
     const [checkboxes, setCheckboxes] = useState<CheckboxState>({
         red: false, 
@@ -27,9 +27,11 @@ export default function CardBox({cards, handleCardHover}: CardBoxProps) {
 
     return(
         <>
-        <div className="container">
-            <CheckboxBar checkboxes={checkboxes} onCheckboxChange={handleChange}/>
-            <CardsContainer cards={cards} checkboxes={checkboxes} handleCardHover={handleCardHover}/>
+        <div style={{backgroundColor: 'red'}}>
+            <div>
+                <CheckboxBar checkboxes={checkboxes} onCheckboxChange={handleChange}/>
+            </div>
+            <CardsContainer checkboxes={checkboxes} handlePickedCard={handlePickedCard}handleCardHover={handleCardHover}/>
         </div>
         </>
     )

@@ -12,12 +12,10 @@ function DisplayCard({hoveredCard}: CardPreviewProps) {
 
 export default function CardPreview({hoveredCard}: CardPreviewProps) {
 
-    if(hoveredCard != undefined)
-        console.log("CardPreview: ", hoveredCard.name)
-
     return (
-        <div style={{backgroundColor: 'green'}}>
-            <DisplayCard hoveredCard={hoveredCard} /> 
+        <div>
+            <div style={{position: "absolute"}}>CardPreview</div>
+            <DisplayCard hoveredCard={hoveredCard}/> 
         </div>
     )
 }

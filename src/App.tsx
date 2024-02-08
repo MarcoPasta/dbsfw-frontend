@@ -1,57 +1,40 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import DeckInfo from './components/ DeckInfo'
 import CardBox from './components/CardBox/CardBox'
 import CardPreview from './components/CardPreview/CardPreview'
 import DeckBuilder from './components/DeckBuilder/DeckBuilder'
 import { Card } from './services/interfaces'
-import { FetchCards } from './services/api'
 
 
 function App() {
-
-
-  // const[url, setUrl] = useState("http://localhost:3000/api/cards/")
-  const url = "http://localhost:3000/api/cards/"
-  // Arrays with retrieved cards
-  const[cards, setCards] = useState<Card[]>([])
-  const[hoveredCard, setHoveredCard] = useState<Card>()
-  
-  async function fetchDataFromApi() {
-      try {
-          setCards([])
-          const result = await FetchCards(url)
-          setCards(result)
-      } catch (error) {
-          console.error
-      }
-  }
-
-  useEffect(() => {
-      let ignore = false
-      if (!ignore)
-          fetchDataFromApi()
-
-      return () => { ignore = true }
-  }, [url])
+  const [hoveredCard, setHoveredCard] = useState<Card>()
+  const [pickedCard, setPickedCard] = useState<Card>()
 
   const handleCardHover = (item: Card) => {
     setHoveredCard(item)
   }
 
+  const handlePickedCard = (item: Card) => {
+    // Mit dem Spread Operator hats dann funktioniert weil hier mit einer neuen
+    // Speicheradresse verglichen wird anstatt mit demselben Objekt 
+    // Garbage Collection erfolgt automatisch
+    setPickedCard({...item})
+  }
+
   return (
     <div className='container'>
-      <div className='component'>
+      <div className='component' style={{backgroundColor: 'green', zIndex: 2}}>
         <CardPreview hoveredCard={hoveredCard}/>
       </div>
-      <div className='component'>
-        <DeckBuilder/>
+      <div className='component' style={{backgroundColor: 'blue'}}>
+        <DeckBuilder pickedCard={pickedCard} />
       </div>
-      <div className='component'>
+      <div className='component' style={{backgroundColor: 'yellow', color: 'black', zIndex: 1}}>
         <DeckInfo/>
       </div>
       <div className='component'>
-        <CardBox cards={cards} handleCardHover={handleCardHover} />
+        <CardBox handlePickedCard={handlePickedCard} handleCardHover={handleCardHover} />
       </div>
     </div>
   )
