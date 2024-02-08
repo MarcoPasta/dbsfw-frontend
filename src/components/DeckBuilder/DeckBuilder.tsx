@@ -1,9 +1,11 @@
 import './DeckBuilder.css'
 import { ReactNode, useEffect, useState } from "react";
 import { Card } from "../../services/interfaces"
+import { EMPTY_CARD } from '../../services/constants';
 
 type DeckBuilderProps = {
-    pickedCard?: Card
+    pickedCard?: Card,
+    handleCardHover: (item: Card) => void
 }
 
 type ItemProps = {
@@ -18,7 +20,7 @@ function Item({item}: ItemProps): ReactNode {
     }
 }
     
-export default function DeckBuilder({pickedCard}: DeckBuilderProps) {
+export default function DeckBuilder({pickedCard, handleCardHover}: DeckBuilderProps) {
     const [deck, setDeck] = useState<Card[]>([])
 
     const handlerSetDeck = (item?: Card) => {
@@ -28,8 +30,23 @@ export default function DeckBuilder({pickedCard}: DeckBuilderProps) {
         }
     }
 
+    const sortByNumber = () => {
+        setDeck((prevDeck) => ([...prevDeck.sort((next, prev) => {
+            if(next.number < prev.number)
+            // if next (the actual element) is smaller than the previus one, place it in front
+                return -1
+            else
+                return 1
+        })]))
+    } 
+
+    const handlerPopItem = (item: Card) => {
+        setDeck(deck.filter( x => x !== item))
+    } 
+    
     useEffect(() => {
         handlerSetDeck(pickedCard)
+        sortByNumber()
     }, [pickedCard])
     
     return (
@@ -37,9 +54,14 @@ export default function DeckBuilder({pickedCard}: DeckBuilderProps) {
             <div style={{backgroundColor: 'lightblue'}}>
                 <ul>
                     {deck.map( (item, index) => (
-                        // Index + timestamp
-                        <li key={index + Date.now()}>
-                            <Item item={item}/>
+                        // Index + Timestamp
+                        <li 
+                            key={index + Date.now()}
+                            onMouseOver={() => handleCardHover(item)}
+                            onMouseLeave={() => handleCardHover(EMPTY_CARD)}
+                            onClick={() => handlerPopItem(item)}
+                        >
+                            <Item item={item} />
                         </li>
                     ))}
                 </ul>

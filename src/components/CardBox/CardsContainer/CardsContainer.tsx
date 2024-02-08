@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useState } from "react"
 import './CardsContainer.css'
 import { Card, CheckboxState } from "../../../services/interfaces.ts"
 import { FetchCards } from "../../../services/api.ts"
+import { EMPTY_CARD } from "../../../services/constants.ts"
 
 type CardsContainerProps = {
     checkboxes: CheckboxState,
@@ -15,14 +16,6 @@ type ItemProps = {
     handlePickedCard: (item: Card) => void,
     handleCardHover: (item: Card) => void
 }
-const emptyCard: Card = {
-    id: 0,
-    name: "",
-    color: "", 
-    number: "",
-    type: "",
-    image: ""
-}
 
 function Item({item, checkboxes, handlePickedCard, handleCardHover}: ItemProps): ReactNode {
     let key: keyof typeof checkboxes
@@ -32,7 +25,7 @@ function Item({item, checkboxes, handlePickedCard, handleCardHover}: ItemProps):
                 <li 
                     onClick={() => handlePickedCard(item)} 
                     onMouseOver={() => handleCardHover(item)} 
-                    onMouseLeave={() => handleCardHover(emptyCard)}
+                    onMouseLeave={() => handleCardHover(EMPTY_CARD)}
                 >
                     <img src={item.image} alt={item.name} width={120}/>
                 </li>

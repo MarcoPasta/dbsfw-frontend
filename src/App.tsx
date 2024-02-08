@@ -28,7 +28,7 @@ function App() {
         <CardPreview hoveredCard={hoveredCard}/>
       </div>
       <div className='component' style={{backgroundColor: 'blue'}}>
-        <DeckBuilder pickedCard={pickedCard} />
+        <DeckBuilder pickedCard={pickedCard} handleCardHover={handleCardHover}/>
       </div>
       <div className='component' style={{backgroundColor: 'yellow', color: 'black', zIndex: 1}}>
         <DeckInfo/>
