@@ -1,3 +1,4 @@
+import './CardPreview.css'
 import { Card } from "../../services/interfaces"
 
 
@@ -7,14 +8,17 @@ type CardPreviewProps = {
 
 function DisplayCard({hoveredCard}: CardPreviewProps) {
     if (hoveredCard != undefined)
-        return <img src={hoveredCard.image} width={400} alt={hoveredCard.name} />
+        return (
+            <div className='image-container'>
+                <img src={hoveredCard.image} alt={hoveredCard.name} className='preview-image'/>
+            </div>
+        )
 }
 
 export default function CardPreview({hoveredCard}: CardPreviewProps) {
 
     return (
-        <div>
-            <div style={{position: "absolute"}}>CardPreview</div>
+        <div className='cardpreview'>
             <DisplayCard hoveredCard={hoveredCard}/> 
         </div>
     )

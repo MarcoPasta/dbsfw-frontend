@@ -5,11 +5,13 @@ import CardBox from './components/CardBox/CardBox'
 import CardPreview from './components/CardPreview/CardPreview'
 import DeckBuilder from './components/DeckBuilder/DeckBuilder'
 import { Card } from './services/interfaces'
+import Navbar from './Navbar/Navbar'
 
 
 function App() {
   const [hoveredCard, setHoveredCard] = useState<Card>()
   const [pickedCard, setPickedCard] = useState<Card>()
+  const [deck, setDeck] = useState<Card[]>([])
 
   const handleCardHover = (item: Card) => {
     setHoveredCard(item)
@@ -22,21 +24,32 @@ function App() {
     setPickedCard({...item})
   }
 
+
   return (
-    <div className='container'>
-      <div className='component' style={{backgroundColor: 'green', zIndex: 2}}>
-        <CardPreview hoveredCard={hoveredCard}/>
+    <>
+
+      <div className='container'>
+        <div className='navbar'>
+          <Navbar/>
+        </div>
+        <div className='subcontainer'>
+
+        <div className='component' style={{zIndex: 2}}>
+          <CardPreview hoveredCard={hoveredCard}/>
+        </div>
+        <div className='component' style={{zIndex: 1}}>
+          <DeckInfo deck={deck}/>
+        </div>
+        <div className='component'>
+          <DeckBuilder deck={deck} setDeck={setDeck} pickedCard={pickedCard} handleCardHover={handleCardHover}/>
+        </div>
+        <div className='component'>
+          <CardBox handlePickedCard={handlePickedCard} handleCardHover={handleCardHover} />
+        </div>
+        </div>
       </div>
-      <div className='component' style={{backgroundColor: 'blue'}}>
-        <DeckBuilder pickedCard={pickedCard} handleCardHover={handleCardHover}/>
-      </div>
-      <div className='component' style={{backgroundColor: 'yellow', color: 'black', zIndex: 1}}>
-        <DeckInfo/>
-      </div>
-      <div className='component'>
-        <CardBox handlePickedCard={handlePickedCard} handleCardHover={handleCardHover} />
-      </div>
-    </div>
+
+    </>
   )
 }
 

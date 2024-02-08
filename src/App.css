@@ -5,40 +5,64 @@ html, body {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
-  height: 100vh; /* 100% der Viewport-Höhe nutzen */
+  flex-direction: column;
+  height: 100vh;
+}
 
-  /* Mobile-Layout: Alle Komponenten nehmen 100% der Breite ein */
+.subcontainer {
+  display: flex;
+  flex-flow: column wrap;
+  height: 97%;
+}
+
+  /* Mobile */
   @media (max-width: 767px) {
-    .component {
+    /* .component {
       width: 100%;
       height: 50%;
-    }
+    } */
   }
 
-  /* Desktop-Layout: Aufteilung gemäß deiner Beschreibung */
+  /* Desktop */
   @media (min-width: 768px) {
+
     .component {
-      height: 50%;
+      flex: 0 0;
+      width: 50%;
+      color: black;
     }
 
     .component:nth-child(1) {
+      flex: 0 0 65%;
       width: 30%;
+      background: rgb(74,74,74);
+      background: linear-gradient(135deg, rgb(74,74,74) 0%, rgb(74,74,74) 30%, rgb(36,36,36) 30%, rgb(36,36,36) 70%, rgb(20,20,20) 70%, rgb(20,20,20) 100%);
     }
 
     .component:nth-child(2) {
+      flex: 0 0 35%;
+      width: 30%;
+      background: rgb(74,74,74);
+      background: linear-gradient(135deg, rgb(74,74,74) 0%, rgb(74,74,74) 30%, rgb(36,36,36) 30%, rgb(36,36,36) 70%, rgb(20,20,20) 70%, rgb(20,20,20) 100%);
+    }
+    
+    .component:nth-child(3) {
+      flex: 0 0 50%;
       width: 70%;
       overflow: auto;
-    }
-
-    .component:nth-child(3) {
-      width: 30%;
+      /* Fusion World color layout */
+      background: rgb(1,0,14);
+      background: -moz-linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
+      background: -webkit-linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
+      background: linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#01000e",endColorstr="#ff0000",GradientType=1);
     }
 
     .component:nth-child(4) {
+      flex: 0 0 50%;
       width: 70%;
       overflow: auto;
+      background: rgb(74,74,74);
+      background: linear-gradient(135deg, rgb(74,74,74) 0%, rgb(74,74,74) 30%, rgb(36,36,36) 30%, rgb(36,36,36) 70%, rgb(20,20,20) 70%, rgb(20,20,20) 100%);
     }
-  }
 }
- 

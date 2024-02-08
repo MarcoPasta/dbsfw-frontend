@@ -27,7 +27,7 @@ export default function CardBox({handlePickedCard, handleCardHover}: CardBoxProp
 
     return(
         <>
-        <div style={{backgroundColor: 'red'}}>
+        <div>
             <div>
                 <CheckboxBar checkboxes={checkboxes} onCheckboxChange={handleChange}/>
             </div>

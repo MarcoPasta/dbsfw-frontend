@@ -1,11 +1,10 @@
-ul {
+.cardscontainer ul {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
 }
 
-li {
+.cardscontainer li {
     flex-basis: "33.33333%";
-    background-color: aqua;
 }

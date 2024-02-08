@@ -63,7 +63,7 @@ export default function CardsContainer({checkboxes, handlePickedCard, handleCard
 
     return(
         <>
-            <div style={{backgroundColor: 'pink'}}>
+            <div className="cardscontainer">
                 <ul>
                     {cards.map( item => (
                         <Item key={item.id} item={item} checkboxes={checkboxes} handlePickedCard={handlePickedCard} handleCardHover={handleCardHover}/>
