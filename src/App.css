@@ -9,10 +9,14 @@ html, body {
   height: 100vh;
 }
 
+.container .navbar {
+  height: 35px;
+}
+
 .subcontainer {
   display: flex;
   flex-flow: column wrap;
-  height: 97%;
+  height: calc(100vh - 35px);  
 }
 
   /* Mobile */
@@ -53,9 +57,7 @@ html, body {
       /* Fusion World color layout */
       background: rgb(1,0,14);
       background: -moz-linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
-      background: -webkit-linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
       background: linear-gradient(90deg, rgba(1,0,14,1) 0%, rgba(40,191,238,1) 35%, rgba(255,0,0,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#01000e",endColorstr="#ff0000",GradientType=1);
     }
 
     .component:nth-child(4) {

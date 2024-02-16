@@ -1,5 +1,5 @@
 import './DeckBuilder.css'
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Card } from "../../services/interfaces"
 import { EMPTY_CARD } from '../../services/constants';
 
@@ -32,17 +32,36 @@ function Item({item, handleCardHover, handlePopItem}: ItemProps): ReactNode {
     
 export default function DeckBuilder({deck, setDeck, pickedCard, handleCardHover}: DeckBuilderProps) {
     
+    const [deckColor, setdeckColor] = useState<String>()
+
     const handleSetDeck = (item?: Card) => {
-        // Check if the same id occures less than 4 times
-        if(deck.filter((x) => x.id === item?.id).length < 4 && item != undefined) {
-            setDeck([...deck, item])
+        
+        // hier könnte man toasts machen
+
+        // If it's the first card being added it will determine the decks deckColor
+        if(deck.length === 0 && item !== undefined) {
+            console.log("First Card uniquedeckColor: ", deckColor);
+            setdeckColor(item.color)
+            setDeck((prevDeck) => [...prevDeck, item])
+        }
+        else if(
+            item != undefined    
+            // Limit amount of Leaders to 1
+            && deck.filter((card) => card.type === "Leader" && card.type === item.type).length < 1
+            // Limit each else card to 4
+            && deck.filter((card) => card.id === item.id).length < 4
+            && item.color === deckColor
+            && deck.length < 60
+        ) {
+            console.log("This should not be on first card");
+            setDeck((prevDeck) => ([...prevDeck, item]))
         }
     }
 
     const sortByNumber = () => {
-        setDeck((prevDeck) => ([...prevDeck.sort((next, prev) => {
-            if(next.number < prev.number)
-            // if next (the actual element) is smaller than the previus one, place it in front
+        setDeck((prevDeck) => ([...prevDeck.sort((act, prev) => {
+            if(act.number < prev.number)
+            // if act is smaller than the previus one, place it in front
                 return -1
             else
                 return 1

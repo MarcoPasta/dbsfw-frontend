@@ -66,6 +66,9 @@ export default function CardsContainer({checkboxes, handlePickedCard, handleCard
             <div className="cardscontainer">
                 <ul>
                     {cards.map( item => (
+                        
+                        /// TODO: hier schon überprüfen um hohe Calculations zu vermeiden und DANN erst an Item übergeben
+
                         <Item key={item.id} item={item} checkboxes={checkboxes} handlePickedCard={handlePickedCard} handleCardHover={handleCardHover}/>
                     ))}
                 </ul>
